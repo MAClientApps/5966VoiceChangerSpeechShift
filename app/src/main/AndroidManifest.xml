@@ -54,9 +54,6 @@
         <intent>
             <action android:name="android.media.browse.MediaBrowserService" />
         </intent>
-        <intent>
-            <action android:name="com.android.vending.billing.InAppBillingService.BIND" />
-        </intent>
     </queries>
 
     <application
@@ -168,9 +165,6 @@
         <meta-data
             android:name="com.android.stamp.type"
             android:value="STAMP_TYPE_DISTRIBUTION_APK" />
-        <meta-data
-            android:name="com.android.vending.derived.apk.id"
-            android:value="4" />
 
         <meta-data
             android:name="applovin.sdk.key"
