@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="audioMode"
+            type="com.voice.changer.speechshift.getApiData.allModel.AudioModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:paddingLeft="@dimen/_20sdp"
+        android:paddingTop="@dimen/_15sdp"
+        android:paddingRight="@dimen/_20sdp"
+        android:tag="layout/item_audio_0">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_avt"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_avt2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_musical_note"
+            app:layout_constraintStart_toStartOf="@+id/iv_avt"
+            app:layout_constraintEnd_toEndOf="@+id/iv_avt"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avt"
+            app:layout_constraintTop_toTopOf="@+id/iv_avt" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_avt"
+            app:layout_constraintTop_toTopOf="@+id/iv_avt">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:ellipsize="middle"
+                android:fontFamily="@font/proxima_nova_condensed_bold"
+                android:singleLine="true"
+                android:text="@string/example"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/proxima_nova_semibold"
+                android:gravity="bottom"
+                android:text="00:09 | 13Kb"
+                android:textColor="@color/grayText"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/bgUnselected"
+            app:layout_constraintTop_toBottomOf="@+id/iv_avt" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

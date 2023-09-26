@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border_drop_locate"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/_20ssp"
+    android:paddingRight="@dimen/_20ssp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_english"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/english"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="1dp"
+        android:background="@color/color_9AADB7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_hindi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/hindi"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_9AADB7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_spanish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/spanish"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_9AADB7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_french"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/french"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_9AADB7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_portuguese"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/portuguese"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_9AADB7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_indonesia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/indonesia"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_9AADB7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_german"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/proxima_nova_semibold"
+        android:gravity="center"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:text="@string/german"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="bold" />
+</LinearLayout>
