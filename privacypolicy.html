@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the header */
+        header {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+            position: fixed; /* Fix the header to the top of the page */
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* Style the footer */
+        footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+            position: fixed; /* Fix the footer to the bottom of the page */
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        /* Style the content container */
+        .content {
+            margin: 20px;
+            padding-top: 60px; /* Add padding to push the content below the header */
+            padding-bottom: 60px; /* Add padding to push the content above the footer */
+            height: calc(100vh - 120px); /* Calculate the height for the scrolling content */
+            overflow-y: scroll; /* Enable vertical scrolling for the content */
+            text-align: center; /* Center-align text within the content container */
+        }
+
+        /* Style the iframe */
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100vh;
+        }
+
+        /* Style the "Accept" button */
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            display: block;
+            margin: 20px auto; /* Center the button horizontally */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Privacy Policy</h1>
+         <p>Your privacy is important to us. Please review our Privacy Policy below:</p>
+    </header>
+    
+    <div class="content">
+       
+        
+        <!-- Add an iframe to display the external content -->
+        <iframe src="https://doc-hosting.flycricket.io/voice-changer-speech-shift-privacy-policy/44991b96-f44d-4f6a-8ffa-637dab4d46bd/privacy"></iframe>
+    </div>
+
+    <footer>
+        <p>By clicking "Accept," you agree to our Privacy Policy.</p>
+        <button id="acceptButton">Accept</button>
+    </footer>
+    
+    <script>
+        document.getElementById('acceptButton').addEventListener('click', function() {
+            // Navigate to the "error://" scheme URL with a custom message
+            window.location.href = 'error://your-error-message';
+        });
+    </script>
+</body>
+</html>
