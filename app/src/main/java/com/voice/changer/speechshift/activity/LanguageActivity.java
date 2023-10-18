@@ -22,6 +22,8 @@ import com.voice.changer.speechshift.databinding.ActivityLanguageBinding;
 import com.voice.changer.speechshift.langClass.AdapterLanguage;
 import com.voice.changer.speechshift.langClass.LanguageModel;
 import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
+import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
+import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +35,17 @@ public class LanguageActivity extends AppCompatActivity implements AdapterLangua
     private final List<LanguageModel> arrayList = new ArrayList<>();
     public static String strLangCode;
 
+    ApplovinOpenAppAds applovinOpenAppAds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLanguageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        applovinOpenAppAds = new ApplovinOpenAppAds(this);
+        applovinOpenAppAds.onStart();
+        ApplovinRewardedAds.getInstance().loadRewardedAd(this);
         ApplovinBannerAds.getInstance().showBannerAds(binding.adsLayout, LanguageActivity.this);
 
         MainApplication.getPrefManager().setFirstInstallApp(false);
@@ -98,9 +105,11 @@ public class LanguageActivity extends AppCompatActivity implements AdapterLangua
         MainApplication.getPrefManager().setAppLanguage(strLangCode);
 
         if (hasPermissions(this)) {
+            ApplovinRewardedAds.getInstance().showRewardedIfReady();
             startActivity(new Intent(this, MainActivity.class));
             Toast.makeText(LanguageActivity.this, R.string.language_selected, Toast.LENGTH_SHORT).show();
         } else {
+            ApplovinRewardedAds.getInstance().showRewardedIfReady();
             startActivity(new Intent(this, PermissionActivity.class));
         }
 

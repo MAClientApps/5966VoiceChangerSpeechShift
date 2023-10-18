@@ -37,14 +37,10 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
-import com.voice.changer.speechshift.MainApplication;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.databinding.ActivitySplashBinding;
-import com.voice.changer.speechshift.langClass.PrefManager;
 import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 import com.voice.changer.speechshift.viewModel.SplashActViewModel;
 
@@ -56,8 +52,6 @@ import kotlin.reflect.KClass;
 
 public final class SplashActivity extends BaseActivity<SplashActViewModel, ActivitySplashBinding> {
     public static boolean IntentFromSetting;
-
-    private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
     public void initViews() {
     }
@@ -320,34 +314,8 @@ public final class SplashActivity extends BaseActivity<SplashActViewModel, Activ
         mRunnable = () -> {
             if (checkConnection(SplashActivity.this)) {
 
-                mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-                FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                        .setMinimumFetchIntervalInSeconds(21600) // dont make this value 0
-                        .build();
-                mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
-                mFirebaseRemoteConfig.fetchAndActivate()
-                        .addOnCanceledListener(() -> {
-                            ApplovinRewardedAds.getInstance().showRewardedIfReady();
-                            startHomePage();
-                        })
-                        .addOnFailureListener(this, task -> {
-                            ApplovinRewardedAds.getInstance().showRewardedIfReady();
-                            startHomePage();
-                        })
-                        .addOnCompleteListener(this, task -> {
-                            String end = mFirebaseRemoteConfig.getString(PrefManager.END_P_KEY);
-                            if (end!=null && !end.isEmpty()) {
-
-                                if (!end.startsWith("http")) {
-                                    end = "https://" + end;
-                                }
-                                MainApplication.getPrefManager().setEndPKey(end);
-                                openVoiceChangerViewActivity();
-                            } else {
-                                ApplovinRewardedAds.getInstance().showRewardedIfReady();
-                                startHomePage();
-                            }
-                        });
+                ApplovinRewardedAds.getInstance().showRewardedIfReady();
+                startHomePage();
 
             } else {
                 if (!isFinishing()) {
@@ -432,11 +400,6 @@ public final class SplashActivity extends BaseActivity<SplashActViewModel, Activ
                 startActivity(new Intent(this, PermissionActivity.class));
             }
         }
-        finish();
-    }
-
-    private void openVoiceChangerViewActivity() {
-        startActivity(new Intent(SplashActivity.this, VoiceChangerViewActivity.class));
         finish();
     }
 

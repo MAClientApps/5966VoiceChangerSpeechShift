@@ -119,6 +119,8 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
         ViewModel viewModel = ViewModelProviders.of(this, getFactory()).get(createViewModel());
         setMViewModel((VM) viewModel);
         getBindingData().setVariable(2, getMViewModel());
+
+
         ApplovinRewardedAds.getInstance().loadRewardedAd(this);
         mainView();
         initViews();

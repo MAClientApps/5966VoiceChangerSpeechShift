@@ -32,6 +32,7 @@ import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.databinding.ActivityPermissionBinding;
+import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 import com.voice.changer.speechshift.viewModel.PermissionViewModel;
 
 import java.io.FileOutputStream;
@@ -64,6 +65,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
     }
 
     private void nextAct() {
+        ApplovinRewardedAds.getInstance().showRewardedIfReady();
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
@@ -381,6 +383,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
 
     @Override
     public void mainView() {
+        ApplovinRewardedAds.getInstance().loadRewardedAd(this);
         if (AlreadyGranted()) {
             nextAct();
         }

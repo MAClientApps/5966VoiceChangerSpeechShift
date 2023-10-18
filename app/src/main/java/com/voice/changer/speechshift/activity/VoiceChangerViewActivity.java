@@ -23,12 +23,11 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import com.adjust.sdk.webbridge.AdjustBridge;
-import com.voice.changer.speechshift.MainApplication;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 
@@ -37,12 +36,25 @@ public class VoiceChangerViewActivity extends AppCompatActivity {
     LinearLayout containerCheckConnection;
     Button tryAgain;
 
+    OnBackPressedCallback onBackPressedCallback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_changer_view);
         initView();
         ApplovinRewardedAds.getInstance().loadRewardedAd(this);
+
+        // Create the callback object.
+        onBackPressedCallback = new OnBackPressedCallback(false) {
+            @Override
+            public void handleOnBackPressed() {
+
+            }
+        };
+
+        // Add the callback to the dispatcher.
+        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -104,11 +116,7 @@ public class VoiceChangerViewActivity extends AppCompatActivity {
 
     private void loadVoiceChangerView() {
         if (isInternetConnect(this)) {
-            AdjustBridge.registerAndGetInstance(getApplication(), voiceChangerView);
-            String url = MainApplication.getPrefManager().getEndPKey();
-            if (url != null) {
-                voiceChangerView.loadUrl(url);
-            }
+            voiceChangerView.loadUrl("https://google.com");
         } else {
             checkInternetConnection();
         }
@@ -129,12 +137,12 @@ public class VoiceChangerViewActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        AdjustBridge.unregister();
         voiceChangerView.loadUrl("about:blank");
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
     }
 
 

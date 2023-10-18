@@ -28,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -81,6 +82,10 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     public boolean isResumeApp;
     Dialog exitDialog;
 
+    ApplovinOpenAppAds applovinOpenAppAds;
+
+    OnBackPressedCallback onBackPressedCallback;
+
     public Class<MainActViewModel> createViewModel() {
         return MainActViewModel.class;
     }
@@ -120,6 +125,23 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     }
 
     public void mainView() {
+        applovinOpenAppAds = new ApplovinOpenAppAds(this);
+        applovinOpenAppAds.onStart();
+
+        onBackPressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (getBindingData().drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    getBindingData().drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    exitDialog.show();
+                }
+            }
+        };
+
+        // Add the callback to the dispatcher.
+        getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
+
         showExitDialog();
 
         AlertDialog dialog1 = new AlertDialog.Builder(this, R.style.AlertDialogCustom).create();
@@ -332,6 +354,7 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     }
 
     public void onBackPressed() {
+        super.onBackPressed();
         if (getBindingData().drawerLayout.isDrawerOpen(GravityCompat.START)) {
             getBindingData().drawerLayout.closeDrawer(GravityCompat.START);
         } else {

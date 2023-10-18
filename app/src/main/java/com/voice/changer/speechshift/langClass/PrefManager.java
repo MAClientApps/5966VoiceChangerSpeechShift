@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 public class PrefManager {
     private static final String APP_LANGUAGE = "APP_LANGUAGE";
     private static final String IS_FIRST_INSTALL_APP = "IS_FIRST_INSTALL_APP";
-    public static final String END_P_KEY = "end";
     private static PrefManager instance;
     private final SharedPreferences.Editor editor;
     private final SharedPreferences pref;
@@ -41,14 +40,4 @@ public class PrefManager {
         this.editor.putBoolean(IS_FIRST_INSTALL_APP, z);
         this.editor.commit();
     }
-
-    public String getEndPKey() {
-        return this.pref.getString(END_P_KEY, "");
-    }
-
-    public void setEndPKey(String strData) {
-        this.editor.putString(END_P_KEY, strData);
-        this.editor.apply();
-    }
-
 }
