@@ -10,7 +10,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -19,6 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.core.content.FileProvider;
 
 import com.google.android.exoplayer2.ExoPlayer;
@@ -32,9 +33,6 @@ import com.google.android.exoplayer2.util.Util;
 import com.voice.changer.speechshift.BuildConfig;
 import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinInterAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.allDialogs.SetRingtoneDialog;
@@ -99,14 +97,23 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
 
     @Override
     public void mainView() {
-        ApplovinInterAds.getInstance().loadInterstitialAd(MusicPlayerActivity.this);
 
-        ApplovinInterAds.getInstance().showInterstitialAd();
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
+        //ApplovinInterAds.getInstance().loadInterstitialAd(MusicPlayerActivity.this);
+
+       // ApplovinInterAds.getInstance().showInterstitialAd();
 
 
         SharedPreferences preferences = getSharedPreferences("MY_PRE", 0);
         TapClick.tap(getBindingData().ivBack, (Function1<View, Unit>) view -> {
-            onBackPressed();
+            backPressed();
             return null;
         });
 
@@ -157,7 +164,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
         ads = findViewById(R.id.ads);
         llyBanner = findViewById(R.id.ll_banner);
 
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner, MusicPlayerActivity.this);
+       // ApplovinBannerAds.getInstance().showBannerAds(llyBanner, MusicPlayerActivity.this);
     }
 
     @Override
@@ -263,7 +270,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
         intent.putExtra(Intent.EXTRA_TEXT, msgShare);
         intent.putExtra(Intent.EXTRA_STREAM, uriForFile);
 
-        new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+       // new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
 
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }
@@ -289,7 +296,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
     public void onPause() {
         super.onPause();
         pauseMusicPlayer();
-        new Handler(Looper.getMainLooper()).postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+        //new Handler(Looper.getMainLooper()).postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
     }
 
     @Override
@@ -311,8 +318,8 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
         exoPlayer.release();
     }
 
-    @Override
-    public void onBackPressed() {
+
+    public void backPressed() {
         finish();
     }
 

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -17,7 +19,6 @@ import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.allBaseAct.BasePopupMenu;
 import com.voice.changer.speechshift.custUi.constatnt.TapClick;
 import com.voice.changer.speechshift.databinding.ActivityCreationBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinInterAds;
 import com.voice.changer.speechshift.viewModel.CreationStudioViewModel;
 
 import java.io.File;
@@ -111,15 +112,23 @@ public final class CreationActivity extends BaseActivity<CreationStudioViewModel
     }
 
     public void mainView() {
-        ApplovinInterAds.getInstance().loadInterstitialAd(CreationActivity.this);
-        ApplovinInterAds.getInstance().showInterstitialAd();
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
+       // ApplovinInterAds.getInstance().loadInterstitialAd(CreationActivity.this);
+        //ApplovinInterAds.getInstance().showInterstitialAd();
         imgSort = getBindingData().toolbar.ivSort;
         getBindingData().toolbar.tvTitle.setText(getString(R.string.my_voice));
     }
 
     public void initViews() {
         TapClick.tap(getBindingData().toolbar.ivBack, (Function1<View, Unit>) view -> {
-            onBackPressed();
+            backPressed();
             return null;
         });
 
@@ -188,8 +197,8 @@ public final class CreationActivity extends BaseActivity<CreationStudioViewModel
 
     }
 
-    public void onBackPressed() {
-        ApplovinInterAds.getInstance().showInterstitialAd();
+    public void backPressed() {
+       // ApplovinInterAds.getInstance().showInterstitialAd();
         finish();
     }
 

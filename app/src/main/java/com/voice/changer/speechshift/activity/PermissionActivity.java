@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -28,11 +29,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.voice.changer.speechshift.R;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.databinding.ActivityPermissionBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 import com.voice.changer.speechshift.viewModel.PermissionViewModel;
 
 import java.io.FileOutputStream;
@@ -65,7 +64,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
     }
 
     private void nextAct() {
-        ApplovinRewardedAds.getInstance().showRewardedIfReady();
+        //ApplovinRewardedAds.getInstance().showRewardedIfReady();
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
@@ -184,7 +183,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
         });
         permission_dialog.findViewById(R.id.permission_btn).setOnClickListener(view -> {
             permission_dialog.dismiss();
-            new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+            //new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
             if (AlreadyGranted()) {
                 return;
             }
@@ -212,7 +211,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
         });
         settingDialog.findViewById(R.id.permission_btn).setOnClickListener(view -> {
             settingDialog.dismiss();
-            new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+           // new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             Uri uri = Uri.fromParts("package", getPackageName(), null);
             intent.setData(uri);
@@ -300,7 +299,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
 
             PermissionActivity.this.dialog.dismiss();
 
-            new Handler(Looper.getMainLooper()).postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+           // new Handler(Looper.getMainLooper()).postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
 
             String calendar = Manifest.permission.WRITE_CALENDAR;
             if (ActivityCompat.shouldShowRequestPermissionRationale(PermissionActivity.this, calendar)) {
@@ -343,8 +342,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
 
     }
 
-    @Override
-    public void onBackPressed() {
+    public void backPressed() {
         nextAct();
     }
 
@@ -383,7 +381,17 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
 
     @Override
     public void mainView() {
-        ApplovinRewardedAds.getInstance().loadRewardedAd(this);
+       // ApplovinRewardedAds.getInstance().loadRewardedAd(this);
+
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
+
         if (AlreadyGranted()) {
             nextAct();
         }

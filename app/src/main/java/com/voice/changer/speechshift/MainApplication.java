@@ -7,8 +7,6 @@ import android.content.Context;
 import android.os.Build;
 
 
-import com.applovin.sdk.AppLovinMediationProvider;
-import com.applovin.sdk.AppLovinSdk;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.ViewModelFactory;
 import com.voice.changer.speechshift.custUi.AppConstant;
@@ -35,11 +33,6 @@ public final class MainApplication extends Application {
         super.onCreate();
         instance = this;
         prefManager = PrefManager.getInstance(instance);
-
-
-        AppLovinSdk.getInstance(this).setMediationProvider(AppLovinMediationProvider.MAX);
-        AppLovinSdk.initializeSdk(this, appLovinSdkConfiguration -> {
-        });
 
         HelperPreference preferencesHelper = new HelpPrefClass(this, "VoiceChangerSpeechShift");
         SchedularProvider schedularProvider = null;

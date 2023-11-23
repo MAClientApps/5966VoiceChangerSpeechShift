@@ -16,6 +16,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -35,8 +37,6 @@ import com.voice.changer.speechshift.custUi.FileMethods;
 import com.voice.changer.speechshift.custUi.constatnt.TapClick;
 import com.voice.changer.speechshift.databinding.ActivityEffectChangeBinding;
 import com.voice.changer.speechshift.getApiData.allModel.EffectModel;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinInterAds;
 import com.voice.changer.speechshift.viewModel.ChangeEffectViewModel;
 
 import org.json.JSONArray;
@@ -139,11 +139,19 @@ public final class ChangeEffectActivity extends BaseActivity<ChangeEffectViewMod
 
     public void mainView() {
 
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
         ads = findViewById(R.id.ads);
         llyBanner = findViewById(R.id.ll_banner);
 
-        ApplovinInterAds.getInstance().loadInterstitialAd(ChangeEffectActivity.this);
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner, ChangeEffectActivity.this);
+        //ApplovinInterAds.getInstance().loadInterstitialAd(ChangeEffectActivity.this);
+        //ApplovinBannerAds.getInstance().showBannerAds(llyBanner, ChangeEffectActivity.this);
 
 
         this.preferences = getSharedPreferences("MY_PRE", 0);
@@ -376,7 +384,7 @@ public final class ChangeEffectActivity extends BaseActivity<ChangeEffectViewMod
 
 
         TapClick.tap(getBindingData().toolbar.ivBack, (Function1<View, Unit>) view -> {
-            onBackPressed();
+            backPressed();
             return null;
         });
 
@@ -637,8 +645,8 @@ public final class ChangeEffectActivity extends BaseActivity<ChangeEffectViewMod
         path = "";
     }
 
-    public void onBackPressed() {
-        ApplovinInterAds.getInstance().showInterstitialAd();
+    public void backPressed() {
+        //ApplovinInterAds.getInstance().showInterstitialAd();
         itemReset();
         finish();
         try {

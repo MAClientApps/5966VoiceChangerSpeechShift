@@ -14,7 +14,6 @@ import com.voice.changer.speechshift.MainApplication;
 import com.voice.changer.speechshift.custUi.SetLanguage;
 import com.voice.changer.speechshift.getApiData.InterfaceDataManager;
 import com.voice.changer.speechshift.getApiData.appScheduler.SchedularProvider;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 
 import javax.inject.Inject;
 
@@ -121,7 +120,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, DB extends ViewData
         getBindingData().setVariable(2, getMViewModel());
 
 
-        ApplovinRewardedAds.getInstance().loadRewardedAd(this);
+        //ApplovinRewardedAds.getInstance().loadRewardedAd(this);
         mainView();
         initViews();
 

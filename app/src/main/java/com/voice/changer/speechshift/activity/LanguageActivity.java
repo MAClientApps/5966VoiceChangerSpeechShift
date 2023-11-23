@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
@@ -21,9 +23,6 @@ import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.databinding.ActivityLanguageBinding;
 import com.voice.changer.speechshift.langClass.AdapterLanguage;
 import com.voice.changer.speechshift.langClass.LanguageModel;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ public class LanguageActivity extends AppCompatActivity implements AdapterLangua
     private final List<LanguageModel> arrayList = new ArrayList<>();
     public static String strLangCode;
 
-    ApplovinOpenAppAds applovinOpenAppAds;
+    //ApplovinOpenAppAds applovinOpenAppAds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +42,26 @@ public class LanguageActivity extends AppCompatActivity implements AdapterLangua
         binding = ActivityLanguageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        applovinOpenAppAds = new ApplovinOpenAppAds(this);
+       /* applovinOpenAppAds = new ApplovinOpenAppAds(this);
         applovinOpenAppAds.onStart();
         ApplovinRewardedAds.getInstance().loadRewardedAd(this);
         ApplovinBannerAds.getInstance().showBannerAds(binding.adsLayout, LanguageActivity.this);
-
+*/
         MainApplication.getPrefManager().setFirstInstallApp(false);
         strCode = MainApplication.getPrefManager().getDefaultLanguage();
         setLanguages();
 
         binding.txtDone.setOnClickListener(v -> {
             nextAct();
+        });
+
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
         });
     }
 
@@ -105,20 +113,19 @@ public class LanguageActivity extends AppCompatActivity implements AdapterLangua
         MainApplication.getPrefManager().setAppLanguage(strLangCode);
 
         if (hasPermissions(this)) {
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+            // ApplovinRewardedAds.getInstance().showRewardedIfReady();
             startActivity(new Intent(this, MainActivity.class));
             Toast.makeText(LanguageActivity.this, R.string.language_selected, Toast.LENGTH_SHORT).show();
         } else {
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+            // ApplovinRewardedAds.getInstance().showRewardedIfReady();
             startActivity(new Intent(this, PermissionActivity.class));
         }
 
     }
 
-    @Override
-    public void onBackPressed() {
+    public void backPressed() {
         if (IntentFromSetting) {
-            super.onBackPressed();
+            finish();
         } else {
             if (hasPermissions(this)) {
                 startActivity(new Intent(this, MainActivity.class));

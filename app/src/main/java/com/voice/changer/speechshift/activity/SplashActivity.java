@@ -41,7 +41,6 @@ import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.databinding.ActivitySplashBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
 import com.voice.changer.speechshift.viewModel.SplashActViewModel;
 
 
@@ -314,7 +313,7 @@ public final class SplashActivity extends BaseActivity<SplashActViewModel, Activ
         mRunnable = () -> {
             if (checkConnection(SplashActivity.this)) {
 
-                ApplovinRewardedAds.getInstance().showRewardedIfReady();
+
                 startHomePage();
 
             } else {

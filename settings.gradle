@@ -12,8 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
         jcenter()
         maven { url "https://jitpack.io" }
-        maven { url 'https://artifacts.applovin.com/android' }
-        maven { url "https://artifact.bytedance.com/repository/pangle" }
 
     }
 }

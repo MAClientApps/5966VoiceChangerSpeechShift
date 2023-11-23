@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.MutableLiveData;
 import androidx.viewpager.widget.ViewPager;
@@ -16,7 +18,6 @@ import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.allBaseAct.BasePopupMenu;
 import com.voice.changer.speechshift.custUi.constatnt.TapClick;
 import com.voice.changer.speechshift.databinding.ActivityOpenFileBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinInterAds;
 import com.voice.changer.speechshift.viewModel.OpenFileViewModel;
 
 import kotlin.Unit;
@@ -91,8 +92,17 @@ public final class OpenFileActivity extends BaseActivity<OpenFileViewModel, Acti
 
     public void mainView() {
         boolean z = false;
-        ApplovinInterAds.getInstance().loadInterstitialAd(OpenFileActivity.this);
-        ApplovinInterAds.getInstance().showInterstitialAd();
+       // ApplovinInterAds.getInstance().loadInterstitialAd(OpenFileActivity.this);
+        //ApplovinInterAds.getInstance().showInterstitialAd();
+
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY_PRE", 0);
         imgSort = getBindingData().toolbar.ivSort;
@@ -101,7 +111,7 @@ public final class OpenFileActivity extends BaseActivity<OpenFileViewModel, Acti
 
     public void initViews() {
         TapClick.tap(getBindingData().toolbar.ivBack, (Function1<View, Unit>) view -> {
-            onBackPressed();
+            backPressed();
             return null;
         });
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -172,8 +182,8 @@ public final class OpenFileActivity extends BaseActivity<OpenFileViewModel, Acti
         sortingByName.postValue(0);
     }
 
-    public void onBackPressed() {
-        ApplovinInterAds.getInstance().showInterstitialAd();
+    public void backPressed() {
+      //  ApplovinInterAds.getInstance().showInterstitialAd();
         finish();
     }
 }

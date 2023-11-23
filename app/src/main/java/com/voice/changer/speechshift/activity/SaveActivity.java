@@ -4,6 +4,9 @@ package com.voice.changer.speechshift.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
+
 import com.reactlibrary.ChangeEffectsModule;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
@@ -12,7 +15,6 @@ import com.voice.changer.speechshift.custUi.AppConstant;
 import com.voice.changer.speechshift.custUi.FileMethods;
 import com.voice.changer.speechshift.custUi.constatnt.TapClick;
 import com.voice.changer.speechshift.databinding.ActivitySaveBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
 import com.voice.changer.speechshift.viewModel.SaveViewModel;
 
 import org.json.JSONArray;
@@ -48,7 +50,8 @@ public final class SaveActivity extends BaseActivity<SaveViewModel, ActivitySave
     public void navigateUp() {
     }
 
-    public void onBackPressed() {
+    public void backPressed() {
+        finish();
     }
 
     public void onFragmentResumed(BaseFragment<?, ?> baseFragment) {
@@ -61,8 +64,16 @@ public final class SaveActivity extends BaseActivity<SaveViewModel, ActivitySave
 
     public void mainView() {
 
-        ApplovinBannerAds.getInstance().showBannerAds(getBindingData().medumrect,SaveActivity.this);
+        //ApplovinBannerAds.getInstance().showBannerAds(getBindingData().medumrect,SaveActivity.this);
 
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
 
 
         int i = 0;

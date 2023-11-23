@@ -10,11 +10,11 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.lifecycle.LifecycleOwnerKt;
 
 import com.voice.changer.speechshift.R;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinInterAds;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.allBaseAct.BasePopupMenu;
@@ -82,8 +82,8 @@ public final class TxtToAudioActivity extends BaseActivity<TextToAudioViewModel,
     @SuppressLint("SetTextI18n")
     public void mainView() {
 
-        ApplovinInterAds.getInstance().loadInterstitialAd(TxtToAudioActivity.this);
-        ApplovinInterAds.getInstance().showInterstitialAd();
+        //ApplovinInterAds.getInstance().loadInterstitialAd(TxtToAudioActivity.this);
+        //ApplovinInterAds.getInstance().showInterstitialAd();
 
         getBindingData().tvLocate.setVisibility(View.VISIBLE);
         getBindingData().toolbar.tvTitle.setText("Text to Audio");
@@ -93,12 +93,21 @@ public final class TxtToAudioActivity extends BaseActivity<TextToAudioViewModel,
         ads = findViewById(R.id.ads);
         llyBanner = findViewById(R.id.ll_banner);
 
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner, TxtToAudioActivity.this);
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
+
+        // ApplovinBannerAds.getInstance().showBannerAds(llyBanner, TxtToAudioActivity.this);
     }
 
     public void initViews() {
         TapClick.tap(getBindingData().toolbar.ivBack, (Function1<View, Unit>) view -> {
-            onBackPressed();
+            backPressed();
             return null;
         });
 
@@ -287,8 +296,8 @@ public final class TxtToAudioActivity extends BaseActivity<TextToAudioViewModel,
         });
     }
 
-    public void onBackPressed() {
-        ApplovinInterAds.getInstance().showInterstitialAd();
+    public void backPressed() {
+        //ApplovinInterAds.getInstance().showInterstitialAd();
         if (!isClickNext) {
             finish();
         }

@@ -48,9 +48,6 @@ import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.custUi.AppConstant;
 import com.voice.changer.speechshift.custUi.constatnt.TapClick;
 import com.voice.changer.speechshift.databinding.ActivityMainBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinRewardedAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
 import com.voice.changer.speechshift.viewModel.MainActViewModel;
 
 import java.util.Objects;
@@ -82,7 +79,7 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     public boolean isResumeApp;
     Dialog exitDialog;
 
-    ApplovinOpenAppAds applovinOpenAppAds;
+   // ApplovinOpenAppAds applovinOpenAppAds;
 
     OnBackPressedCallback onBackPressedCallback;
 
@@ -125,8 +122,8 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     }
 
     public void mainView() {
-        applovinOpenAppAds = new ApplovinOpenAppAds(this);
-        applovinOpenAppAds.onStart();
+       // applovinOpenAppAds = new ApplovinOpenAppAds(this);
+        //applovinOpenAppAds.onStart();
 
         onBackPressedCallback = new OnBackPressedCallback(true) {
             @Override
@@ -192,8 +189,8 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
         ads = findViewById(R.id.ads);
         llyBanner = findViewById(R.id.ll_banner);
 
-        ApplovinRewardedAds.getInstance().loadRewardedAd(MainActivity.this);
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner, MainActivity.this);
+      //  ApplovinRewardedAds.getInstance().loadRewardedAd(MainActivity.this);
+       // ApplovinBannerAds.getInstance().showBannerAds(llyBanner, MainActivity.this);
 
     }
 
@@ -231,7 +228,7 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
         TapClick.tap(getBindingData().layoutContent.llLanguage, (Function1<View, Unit>) view -> {
             IntentFromSetting = true;
             closeDrawer();
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+           // ApplovinRewardedAds.getInstance().showRewardedIfReady();
             startActivity(new Intent(MainActivity.this, LanguageActivity.class));
             return null;
         });
@@ -272,25 +269,25 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     private void mainEvents() {
 
         TapClick.tap(getBindingData().llRecord, (Function1<View, Unit>) view -> {
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+           // ApplovinRewardedAds.getInstance().showRewardedIfReady();
             nextActivity(RecordingActivity.class, null);
             return null;
         });
 
         TapClick.tap(getBindingData().llOpenFile, (Function1<View, Unit>) view -> {
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+            //ApplovinRewardedAds.getInstance().showRewardedIfReady();
             nextActivity(OpenFileActivity.class, null);
             return null;
         });
 
         TapClick.tap(getBindingData().llTextAudio, (Function1<View, Unit>) view -> {
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+            //ApplovinRewardedAds.getInstance().showRewardedIfReady();
             nextActivity(TxtToAudioActivity.class, null);
             return null;
         });
 
         TapClick.tap(getBindingData().llMyVoice, (Function1<View, Unit>) view -> {
-            ApplovinRewardedAds.getInstance().showRewardedIfReady();
+            //ApplovinRewardedAds.getInstance().showRewardedIfReady();
             nextActivity(CreationActivity.class, null);
             return null;
         });
@@ -320,9 +317,9 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     @Override
     protected void onPause() {
         super.onPause();
-        if (exitDialog != null && exitDialog.isShowing()) {
+        /*if (exitDialog != null && exitDialog.isShowing()) {
             new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
-        }
+        }*/
     }
 
 
@@ -353,14 +350,14 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
         }
     }
 
-    public void onBackPressed() {
+ /*   public void onBackPressed() {
         super.onBackPressed();
         if (getBindingData().drawerLayout.isDrawerOpen(GravityCompat.START)) {
             getBindingData().drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             exitDialog.show();
         }
-    }
+    }*/
 
     @SuppressLint("InflateParams")
     public void permissionDialog() {

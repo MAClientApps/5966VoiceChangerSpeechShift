@@ -9,12 +9,12 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.databinding.Observable;
 import androidx.databinding.ObservableInt;
 
 import com.voice.changer.speechshift.R;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinInterAds;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.allDialogs.NotRecordedDialog;
@@ -79,8 +79,8 @@ public final class RecordingActivity extends BaseActivity<RecordingViewModel, Ac
 
     public void mainView() {
         Context context = this;
-        ApplovinInterAds.getInstance().loadInterstitialAd(RecordingActivity.this);
-        ApplovinInterAds.getInstance().showInterstitialAd();
+        //ApplovinInterAds.getInstance().loadInterstitialAd(RecordingActivity.this);
+        //ApplovinInterAds.getInstance().showInterstitialAd();
         SetLanguage.setLocale(context);
         getBindingData().toolbar.tvTitle.setText(R.string.record_voice);
         showHideExRecord();
@@ -91,14 +91,23 @@ public final class RecordingActivity extends BaseActivity<RecordingViewModel, Ac
         ads = findViewById(R.id.ads);
         llyBanner = findViewById(R.id.ll_banner);
 
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner, RecordingActivity.this);
+        OnBackPressedDispatcher dispatcher = getOnBackPressedDispatcher();
+        dispatcher.addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle the back button press here.
+                backPressed();
+            }
+        });
+
+        //ApplovinBannerAds.getInstance().showBannerAds(llyBanner, RecordingActivity.this);
 
     }
 
     @SuppressLint("SetTextI18n")
     public void initViews() {
         TapClick.tap(getBindingData().toolbar.ivBack, (Function1<View, Unit>) view -> {
-            onBackPressed();
+            backPressed();
             return null;
         });
         TapClick.tap(getBindingData().ivReset, (Function1<View, Unit>) view -> {
@@ -353,10 +362,11 @@ public final class RecordingActivity extends BaseActivity<RecordingViewModel, Ac
         stopTimer();
     }
 
-    public void onBackPressed() {
+    public void backPressed() {
         if (getBindingData().icStart.isClickable()) {
-            ApplovinInterAds.getInstance().showInterstitialAd();
-            super.onBackPressed();
+            //ApplovinInterAds.getInstance().showInterstitialAd();
+           // super.onBackPressed();
+            finish();
             return;
         }
 
