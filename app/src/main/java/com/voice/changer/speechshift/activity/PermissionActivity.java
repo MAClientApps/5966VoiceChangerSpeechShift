@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
@@ -183,7 +185,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
         });
         permission_dialog.findViewById(R.id.permission_btn).setOnClickListener(view -> {
             permission_dialog.dismiss();
-            //new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+            new Handler().postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
             if (AlreadyGranted()) {
                 return;
             }
@@ -211,7 +213,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
         });
         settingDialog.findViewById(R.id.permission_btn).setOnClickListener(view -> {
             settingDialog.dismiss();
-           // new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+            new Handler().postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             Uri uri = Uri.fromParts("package", getPackageName(), null);
             intent.setData(uri);
@@ -299,7 +301,7 @@ public class PermissionActivity extends BaseActivity<PermissionViewModel, Activi
 
             PermissionActivity.this.dialog.dismiss();
 
-           // new Handler(Looper.getMainLooper()).postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
 
             String calendar = Manifest.permission.WRITE_CALENDAR;
             if (ActivityCompat.shouldShowRequestPermissionRationale(PermissionActivity.this, calendar)) {

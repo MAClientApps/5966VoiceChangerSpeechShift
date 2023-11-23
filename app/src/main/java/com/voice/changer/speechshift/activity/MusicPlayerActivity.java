@@ -10,6 +10,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -239,7 +240,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
         TapClick.tap(getBindingData().llReRecord, (Function1<View, Unit>) view -> {
             DefaultImpl.showDefaultAct(MusicPlayerActivity.this, RecordingActivity.class, null, 2, null);
             ChangeEffectActivity.Companion.setEffectModelSelected(null);
-            onBackPressed();
+            backPressed();
             return null;
         });
         TapClick.tap(getBindingData().tvShare, (Function1<View, Unit>) view -> {
@@ -252,7 +253,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
             ChangeEffectActivity.Companion.setEffectModelSelected(null);
             IntentFromSetting = true;
             DefaultImpl.showDefaultAct(MusicPlayerActivity.this, MainActivity.class, null, 2, null);
-            onBackPressed();
+            backPressed();
             return null;
         });
 
@@ -270,7 +271,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
         intent.putExtra(Intent.EXTRA_TEXT, msgShare);
         intent.putExtra(Intent.EXTRA_STREAM, uriForFile);
 
-       // new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+        new Handler().postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
 
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }
@@ -296,7 +297,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
     public void onPause() {
         super.onPause();
         pauseMusicPlayer();
-        //new Handler(Looper.getMainLooper()).postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
     }
 
     @Override

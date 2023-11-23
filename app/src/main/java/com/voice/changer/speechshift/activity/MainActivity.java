@@ -42,6 +42,7 @@ import androidx.core.view.GravityCompat;
 
 import com.voice.changer.speechshift.BroadcastReceiver;
 import com.voice.changer.speechshift.BuildConfig;
+import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
@@ -317,9 +318,9 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
     @Override
     protected void onPause() {
         super.onPause();
-        /*if (exitDialog != null && exitDialog.isShowing()) {
-            new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
-        }*/
+        if (exitDialog != null && exitDialog.isShowing()) {
+            new Handler().postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
+        }
     }
 
 

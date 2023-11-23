@@ -32,8 +32,6 @@ import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.activity.CreationActivity;
 import com.voice.changer.speechshift.activity.MusicPlayerActivity;
 import com.voice.changer.speechshift.adapters.ItemDowAudioAdapter;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.allDialogs.DeleteDialog;
 import com.voice.changer.speechshift.allDialogs.RenameDialog;
@@ -123,7 +121,7 @@ public final class FragmentAudioStudio extends BaseFragment<CreationViewModel, F
         ads = getDataBinding().ads;
         llyBanner = getDataBinding().llBanner;
 
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner, requireActivity());
+        //ApplovinBannerAds.getInstance().showBannerAds(llyBanner, requireActivity());
 
 
         IntentFilter intentFilter = new IntentFilter();
@@ -302,7 +300,7 @@ public final class FragmentAudioStudio extends BaseFragment<CreationViewModel, F
         intent.putExtra(Intent.EXTRA_TEXT, msgShare);
         intent.putExtra(Intent.EXTRA_STREAM, uriForFile);
 
-        new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+        new Handler().postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
 
         context.startActivity(Intent.createChooser(intent, context.getString(R.string.share)));
     }

@@ -5,6 +5,7 @@ import java.io.File;
 public class FilenameUtils {
 
     private static final char otherSeparator;
+    public static boolean isScreenOnOff = false;
 
     static {
         if (isSystemWindows()) {

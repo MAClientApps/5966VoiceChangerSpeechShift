@@ -13,7 +13,6 @@ import com.voice.changer.speechshift.activity.ChangeEffectActivity;
 import com.voice.changer.speechshift.activity.OpenFileActivity;
 import com.voice.changer.speechshift.adapters.AudioAdapter;
 import com.voice.changer.speechshift.databinding.FragmentAudioBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinBannerAds;
 import com.voice.changer.speechshift.allBaseAct.BaseFragment;
 import com.voice.changer.speechshift.custUi.AppConstant;
 import com.voice.changer.speechshift.viewModel.DeviceMusicViewModel;
@@ -51,7 +50,7 @@ public final class FragmentAudio extends BaseFragment<DeviceMusicViewModel, Frag
         ads = getDataBinding().ads;
         llyBanner = getDataBinding().llBanner;
 
-        ApplovinBannerAds.getInstance().showBannerAds(llyBanner,requireActivity());
+       // ApplovinBannerAds.getInstance().showBannerAds(llyBanner,requireActivity());
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         getDataBinding().rclAudio.setLayoutManager(manager);

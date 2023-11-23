@@ -3,9 +3,9 @@ package com.voice.changer.speechshift.allDialogs;
 import android.app.Activity;
 import android.os.Handler;
 
+import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.databinding.DialogPremissionRingtoneBinding;
-import com.voice.changer.speechshift.myAdsClasses.ApplovinOpenAppAds;
 import com.voice.changer.speechshift.allBaseAct.BaseDialog;
 import com.voice.changer.speechshift.custUi.SetLanguage;
 import com.voice.changer.speechshift.custUi.constatnt.TapClick;
@@ -54,7 +54,7 @@ public final class RingtonesPermissionDialog extends BaseDialog<DialogPremission
             return null;
         });
         TapClick.tap(getDataBinding().tvAllow, view -> {
-            new Handler().postDelayed(() -> ApplovinOpenAppAds.isScreenOnOff = true, 500);
+            new Handler().postDelayed(() -> FilenameUtils.isScreenOnOff = true, 500);
             getAllowClick().invoke();
             dismiss();
             return null;
