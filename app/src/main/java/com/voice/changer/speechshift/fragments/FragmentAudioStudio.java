@@ -26,7 +26,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.voice.changer.speechshift.BuildConfig;
 import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.activity.CreationActivity;
@@ -295,7 +294,7 @@ public final class FragmentAudioStudio extends BaseFragment<CreationViewModel, F
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("audio/*");
         String msgShare;
-        msgShare = context.getResources().getString(R.string.appShare) + "\n\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n";
+        msgShare = context.getResources().getString(R.string.appShare) + "\n\n" + "https://play.google.com/store/apps/details?id=" + context.getPackageName() + "\n";
         intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, msgShare);
         intent.putExtra(Intent.EXTRA_STREAM, uriForFile);

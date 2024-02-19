@@ -31,7 +31,6 @@ import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.voice.changer.speechshift.BuildConfig;
 import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
@@ -266,7 +265,7 @@ public final class MusicPlayerActivity extends BaseActivity<MusicPlayerViewModel
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("audio/*");
         String msgShare;
-        msgShare = context.getResources().getString(R.string.appShare) + "\n\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n";
+        msgShare = context.getResources().getString(R.string.appShare) + "\n\n" + "https://play.google.com/store/apps/details?id=" + context.getPackageName()  + "\n";
         intent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name));
         intent.putExtra(Intent.EXTRA_TEXT, msgShare);
         intent.putExtra(Intent.EXTRA_STREAM, uriForFile);

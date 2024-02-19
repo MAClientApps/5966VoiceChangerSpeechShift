@@ -41,7 +41,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 
 import com.voice.changer.speechshift.BroadcastReceiver;
-import com.voice.changer.speechshift.BuildConfig;
 import com.voice.changer.speechshift.FilenameUtils;
 import com.voice.changer.speechshift.R;
 import com.voice.changer.speechshift.allBaseAct.BaseActivity;
@@ -335,7 +334,7 @@ public final class MainActivity extends BaseActivity<MainActViewModel, ActivityM
             Intent intentShare = new Intent(Intent.ACTION_SEND);
             intentShare.setType("text/plain");
             String msgShare;
-            msgShare = getResources().getString(R.string.appShare) + "\n\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n";
+            msgShare = getResources().getString(R.string.appShare) + "\n\n" + "https://play.google.com/store/apps/details?id=" + getPackageName()  + "\n\n";
             intentShare.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
             intentShare.putExtra(Intent.EXTRA_TEXT, msgShare);
             new Handler().postDelayed(() ->
