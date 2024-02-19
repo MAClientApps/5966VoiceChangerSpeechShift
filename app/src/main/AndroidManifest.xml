@@ -152,12 +152,6 @@
             android:stopWithTask="true" />
 
         <meta-data
-            android:name="com.android.vending.splits.required"
-            android:value="true" />
-        <meta-data
-            android:name="com.android.stamp.source"
-            android:value="https://play.google.com/store" />
-        <meta-data
             android:name="com.android.stamp.type"
             android:value="STAMP_TYPE_DISTRIBUTION_APK" />
 
